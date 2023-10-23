@@ -2,6 +2,11 @@ include ActionController::HttpAuthentication::Basic::ControllerMethods #authenti
 
 class UsersController < ApplicationController
     before_action :basic_auth, only: [:show] #showアクション実行時のみ、Basic認証を要求する
+
+    def index
+        users = User.all
+        render json: {users: users}
+    end
     
     def show
         # Basic認証ではブラウザに認証情報を保存する。
