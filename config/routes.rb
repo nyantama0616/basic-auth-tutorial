@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   # root "articles#index"
   get "ping", to: "pings#index"
   post "signup", to: "users#create"
+  get "users/:id", to: "users#show"
 end

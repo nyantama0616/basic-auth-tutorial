@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+    def show
+        user = User.find(params["id"])
+        render json: {user: user}
+    end
+
     def create
         user = User.new(user_id: params["user_id"], password: params["password"])
         if user.save
