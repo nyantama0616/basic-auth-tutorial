@@ -84,4 +84,28 @@ RSpec.describe "Users", type: :request do
       expect(response.parsed_body).to eq(expected_body)
     end
   end
+
+  describe "POST /close" do
+    it "認証情報なしでリクエストを送ると、401が返ってくる" do
+      post "/close"
+
+      expect(response).to have_http_status(401)
+    end
+
+    before do
+      @user = FactoryBot.create(:user) 
+      headers = { HTTP_AUTHORIZATION: ActionController::HttpAuthentication::Basic.encode_credentials(@user.user_id, @user.password) } #認証情報(Basic)を持ったヘッダ
+      
+      post "/close", headers: headers
+    end
+
+    it "認証情報(Basic)ありでリクエストを送ると、200が返ってくる" do
+      expect(response).to have_http_status(200)
+    end
+    
+    it "認証情報(Basic)ありでリクエストを送ると、ユーザを削除できる" do
+      user_exists = User.exists?(@user.id)
+      expect(user_exists).to be_falsy
+    end
+  end
 end
