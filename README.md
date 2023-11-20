@@ -1,24 +1,6 @@
-# README
+# Basic認証のチュートリアル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[永野さんのBasic認証課題](https://github.com/RintaroNagano/go-basic-auth)をやってみました
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+コミット履歴を辿れば理解できるようにしたつもりです。\
+僕なりに頑張って書いたので、参考にしていただけると嬉しいです。
