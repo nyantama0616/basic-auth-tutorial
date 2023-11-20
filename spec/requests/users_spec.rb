@@ -23,4 +23,36 @@ RSpec.describe "Users", type: :request do
       expect(response.parsed_body).to eq(expected_body)
     end
   end
+
+  describe "GET /users/:id" do
+    before do
+      #なぜかfactoryを使ってモデルをcreateする
+      #別にUser.create()でもいいと思うんだが、テストの際は基本的にこうやってモデルをcreateするらしい
+      @user = FactoryBot.create(:user) 
+      @headers = { HTTP_AUTHORIZATION: ActionController::HttpAuthentication::Basic.encode_credentials(@user.user_id, @user.password) } #認証情報(Basic)を持ったヘッダ
+    end
+
+    it "認証情報なしでリクエストを送ると、401が返ってくる" do
+      get "/users/#{@user.id}"
+
+      expect(response).to have_http_status(401)
+    end
+    
+    it "認証情報(Basic)ありでリクエストを送ると、200が返ってくる" do
+      get "/users/#{@user.id}", headers: @headers
+
+      expect(response).to have_http_status(200)
+    end
+
+    it "認証情報(Basic)ありでリクエストを送ると、意図したレスポンスが返ってくる" do
+      expected_body = {
+        "user_id" => @user.user_id,
+        "password" => @user.password
+      }
+
+      get "/users/#{@user.id}", headers: @headers
+
+      expect(response.parsed_body).to eq(expected_body)
+    end
+  end
 end

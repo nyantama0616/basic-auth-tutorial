@@ -41,6 +41,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'rspec-rails', '~> 5.0.0' #テストを行うためのライブラリ
   gem 'pry-byebug', '~> 3.10.1' #デバッグに便利だから入れておく
+  gem 'factory_bot_rails', '~> 6.2.0' #テスト用にモデルをcreateするためのライブラリ
 end
 
 group :development do
