@@ -55,4 +55,33 @@ RSpec.describe "Users", type: :request do
       expect(response.parsed_body).to eq(expected_body)
     end
   end
+
+  describe "PATCH /users/:id" do
+    it "認証情報なしでリクエストを送ると、401が返ってくる" do
+      patch "/users/#{@user.id}"
+
+      expect(response).to have_http_status(401)
+    end
+
+    before do
+      @user = FactoryBot.create(:user) 
+      @request_body = {nickname: "panda", comment: "hello"}
+      headers = { HTTP_AUTHORIZATION: ActionController::HttpAuthentication::Basic.encode_credentials(@user.user_id, @user.password) } #認証情報(Basic)を持ったヘッダ
+      
+      patch "/users/#{@user.id}", headers: headers, params: @request_body
+    end
+
+    it "認証情報(Basic)ありでリクエストを送ると、200が返ってくる" do
+      expect(response).to have_http_status(200)
+    end
+
+    it "認証情報(Basic)ありでリクエストを送ると、意図したレスポンスが返ってくる" do
+      expected_body = {
+        "nickname" => @request_body[:nickname],
+        "comment" => @request_body[:comment]
+      }
+      
+      expect(response.parsed_body).to eq(expected_body)
+    end
+  end
 end
