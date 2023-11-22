@@ -26,8 +26,8 @@ development:
   host: <%= ENV["DB_HOST_NAME"] %>
   # socket: <%= ENV["MYSQL_SOCKET"] %>
   socket: /cloudsql/<%= ENV["DB_CONNECTION_NAME"] %>
+  database: <%= ENV["DB_DATABASE_NAME"] %>
   # <<: *default
-  # database: basic_auth_tutorial_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

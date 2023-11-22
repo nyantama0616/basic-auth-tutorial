@@ -14,4 +14,9 @@ COPY . ${ROOT}
 RUN gem install bundler
 RUN bundle install --jobs 4
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+COPY start.sh /usr/bin/
+RUN chmod +x /usr/bin/start.sh
+ENTRYPOINT ["start.sh"]
+EXPOSE 3000
+
+CMD ["bin/start"]
