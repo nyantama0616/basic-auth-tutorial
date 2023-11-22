@@ -10,6 +10,7 @@ RUN npm install --global yarn
 WORKDIR ${ROOT}
 
 COPY . ${ROOT}
+COPY .production.env ${ROOT}/.env
 
 RUN gem install bundler
 RUN bundle install --jobs 4
