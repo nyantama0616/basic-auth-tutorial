@@ -35,5 +35,6 @@ module BasicAuthTutorial
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.hosts << "basic-auth-tutorial-gn5qd2tz7a-an.a.run.app"
   end
 end
