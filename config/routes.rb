@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   get "users", to: "users#index"
   patch "users/:id", to: "users#update"
   post "close", to: "users#destroy"
+  get "test", to: "pings#test"
 end
