@@ -93,13 +93,14 @@ RSpec.describe "Users", type: :request do
     end
 
     before do
-      @user = FactoryBot.create(:user) 
+      @user = FactoryBot.create(:hello_user) 
       headers = { HTTP_AUTHORIZATION: ActionController::HttpAuthentication::Basic.encode_credentials(@user.user_id, @user.password) } #認証情報(Basic)を持ったヘッダ
       
       post "/close", headers: headers
     end
 
     it "認証情報(Basic)ありでリクエストを送ると、200が返ってくる" do
+      binding.pry
       expect(response).to have_http_status(200)
     end
     
